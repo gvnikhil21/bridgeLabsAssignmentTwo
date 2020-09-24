@@ -17,31 +17,43 @@ public class SnakeLadder {
 		int playerPosition;
 		int numberOnDie;
 		int option;
+		int noOfTurns = 0;
 
 		// Setting player starting position to zero
 		playerPosition = 0;
 
+		System.out.println("-----------------------------------------------");
+		System.out.println("numOnDie\toptionType\tplayerPosition");
+		System.out.println("-----------------------------------------------");
 		// Repeating till the player reaches position 100
 		while (playerPosition < WINNING_POSITION) {
 			// Get number on Die (between 1 and 6)
 			numberOnDie = (int) Math.floor((Math.random() * 6) + 1);
+			System.out.print(numberOnDie + "\t\t");
+			noOfTurns++;
 
 			// Check for option
 			option = (int) Math.floor((Math.random() * 3) + 1);
 			switch (option) {
 			case NO_PLAY:
+				System.out.print("NO_PLAY\t\t\t");
 				break;
 			case LADDER:
 				if (playerPosition + numberOnDie <= WINNING_POSITION)
 					playerPosition += numberOnDie;
+				System.out.print("LADDER\t\t\t");
 				break;
 			case SNAKE:
 				playerPosition -= numberOnDie;
 				if (playerPosition < 0)
 					playerPosition = 0;
+				System.out.print("SNAKE\t\t\t");
 				break;
 			}
+			System.out.println(playerPosition);
 		}
+		System.out.println("-----------------------------------------------");
+		System.out.println("To win the game, the dice was thrown " + noOfTurns + " times.");
 	}
 
 }
