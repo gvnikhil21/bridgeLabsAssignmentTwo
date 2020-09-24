@@ -1,16 +1,18 @@
 package snakeLadder;
 
 /**
- * Snake and Ladder Simulator.
+ * Single Player Snake and Ladder Simulator.
  */
 
 public class SnakeLadder {
 
 	public static void main(String[] args) {
-		// Welcome message
-		System.out.println("Welcome to Snake and Ladder Simulator!");
 
+		// variables
+		int playerPosition;
+
+		// Setting player starting position to zero
+		playerPosition = 0;
 	}
 
 }
-
