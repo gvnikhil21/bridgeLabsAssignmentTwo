@@ -1,7 +1,7 @@
 package snakeLadder;
 
 /**
- * Single Player Snake and Ladder Simulator.
+ * Two Player Snake and Ladder Simulator.
  */
 
 public class SnakeLadder {
@@ -14,46 +14,98 @@ public class SnakeLadder {
 	public static void main(String[] args) {
 
 		// variables
-		int playerPosition;
+		int playerOnePosition;
+		int playerTwoPosition;
 		int numberOnDie;
 		int option;
 		int noOfTurns = 0;
+		int playerOneTurns = 0;
+		int playerTwoTurns = 0;
+		int isPlayerOneTurn;
 
 		// Setting player starting position to zero
-		playerPosition = 0;
+		playerOnePosition = 0;
+		playerTwoPosition = 0;
 
-		System.out.println("-----------------------------------------------");
-		System.out.println("numOnDie\toptionType\tplayerPosition");
-		System.out.println("-----------------------------------------------");
 		// Repeating till the player reaches position 100
-		while (playerPosition < WINNING_POSITION) {
-			// Get number on Die (between 1 and 6)
-			numberOnDie = (int) Math.floor((Math.random() * 6) + 1);
-			System.out.print(numberOnDie + "\t\t");
-			noOfTurns++;
 
-			// Check for option
-			option = (int) Math.floor((Math.random() * 3) + 1);
-			switch (option) {
-			case NO_PLAY:
-				System.out.print("NO_PLAY\t\t\t");
+		// playerOne starts the game (1->true 0->false)
+		isPlayerOneTurn = 1;
+
+		System.out.println("-----------------------------");
+		System.out.println("posPlayerOne\tposPlayerTwo");
+		System.out.println("-----------------------------");
+		while (playerOnePosition < WINNING_POSITION && playerTwoPosition < WINNING_POSITION) {
+
+			switch ((int) isPlayerOneTurn) {
+			case 1:
+				// PlayerOne
+				// Get number on Die (between 1 and 6)
+				numberOnDie = (int) Math.floor((Math.random() * 6) + 1);
+				playerOneTurns++;
+
+				// Check for option
+				option = (int) Math.floor((Math.random() * 3) + 1);
+				switch (option) {
+				case NO_PLAY:
+					break;
+				case LADDER:
+					if (playerOnePosition + numberOnDie <= WINNING_POSITION)
+						playerOnePosition += numberOnDie;
+					break;
+				case SNAKE:
+					playerOnePosition -= numberOnDie;
+					if (playerOnePosition < 0)
+						playerOnePosition = 0;
+					break;
+				}
+				if (option == LADDER)
+					break;
+				else
+					isPlayerOneTurn = 0;
+				System.out.print(playerOnePosition + "\t\t");
 				break;
-			case LADDER:
-				if (playerPosition + numberOnDie <= WINNING_POSITION)
-					playerPosition += numberOnDie;
-				System.out.print("LADDER\t\t\t");
-				break;
-			case SNAKE:
-				playerPosition -= numberOnDie;
-				if (playerPosition < 0)
-					playerPosition = 0;
-				System.out.print("SNAKE\t\t\t");
+			case 0:
+				// PlayerTwo
+				// Get number on Die (between 1 and 6)
+				numberOnDie = (int) Math.floor((Math.random() * 6) + 1);
+				playerTwoTurns++;
+
+				// Check for option
+				option = (int) Math.floor((Math.random() * 3) + 1);
+				switch (option) {
+				case NO_PLAY:
+					break;
+				case LADDER:
+					if (playerTwoPosition + numberOnDie <= WINNING_POSITION)
+						playerTwoPosition += numberOnDie;
+					break;
+				case SNAKE:
+					playerTwoPosition -= numberOnDie;
+					if (playerTwoPosition < 0)
+						playerTwoPosition = 0;
+					break;
+				}
+				if (option == LADDER)
+					break;
+				else
+					isPlayerOneTurn = 1;
+				System.out.println(playerTwoPosition);
 				break;
 			}
-			System.out.println(playerPosition);
 		}
-		System.out.println("-----------------------------------------------");
-		System.out.println("To win the game, the dice was thrown " + noOfTurns + " times.");
+
+		if (playerOnePosition == WINNING_POSITION) {
+			System.out.println(playerOnePosition + "\t\t" + playerTwoPosition);
+			System.out.println("-----------------------------");
+			System.out.println("Player One has won the game!");
+		}
+
+		else {
+			System.out.println(playerTwoPosition);
+			System.out.println("-----------------------------");
+			System.out.println("Player Two has won the game!");
+		}
 	}
 
 }
