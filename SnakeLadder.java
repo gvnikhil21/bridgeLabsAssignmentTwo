@@ -22,7 +22,7 @@ public class SnakeLadder {
 		playerPosition = 0;
 
 		// Repeating till the player reaches position 100
-		while (playerPosition < 100) {
+		while (playerPosition < WINNING_POSITION) {
 			// Get number on Die (between 1 and 6)
 			numberOnDie = (int) Math.floor((Math.random() * 6) + 1);
 
@@ -32,7 +32,8 @@ public class SnakeLadder {
 			case NO_PLAY:
 				break;
 			case LADDER:
-				playerPosition += numberOnDie;
+				if (playerPosition + numberOnDie <= WINNING_POSITION)
+					playerPosition += numberOnDie;
 				break;
 			case SNAKE:
 				playerPosition -= numberOnDie;
