@@ -50,11 +50,13 @@ public class SnakeLadder {
 				case NO_PLAY:
 					break;
 				case LADDER:
+					// Ensuring player moves if position less than or equal to WINNING_POSITION
 					if (playerOnePosition + numberOnDie <= WINNING_POSITION)
 						playerOnePosition += numberOnDie;
 					break;
 				case SNAKE:
 					playerOnePosition -= numberOnDie;
+					// Ensuring player starts again from zero if position becomes less than zero.
 					if (playerOnePosition < 0)
 						playerOnePosition = 0;
 					break;
@@ -77,11 +79,13 @@ public class SnakeLadder {
 				case NO_PLAY:
 					break;
 				case LADDER:
+					// Ensuring player moves if position less than or equal to WINNING_POSITION
 					if (playerTwoPosition + numberOnDie <= WINNING_POSITION)
 						playerTwoPosition += numberOnDie;
 					break;
 				case SNAKE:
 					playerTwoPosition -= numberOnDie;
+					// Ensuring player starts again from zero if position becomes less than zero.
 					if (playerTwoPosition < 0)
 						playerTwoPosition = 0;
 					break;
